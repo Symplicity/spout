@@ -218,6 +218,9 @@ EOD;
             $cellXML .= ' t="b"><v>' . (int) ($cell->getValue()) . '</v></c>';
         } elseif ($cell->isNumeric()) {
             $cellXML .= '><v>' . $cell->getValue() . '</v></c>';
+        } elseif ($cell->isDate()) {
+            $excelDate = $this->getExcelDate($cell->getValue());
+            $cellXML .= '><v>' . $excelDate . '</v></c>';
         } elseif ($cell->isEmpty()) {
             if ($this->styleManager->shouldApplyStyleOnEmptyCell($styleId)) {
                 $cellXML .= '/>';
@@ -254,6 +257,16 @@ EOD;
         }
 
         return $cellXMLFragment;
+    }
+
+    public function getExcelDate(?\DateTime $date) : string
+    {
+        $excelDate = '';
+        if ($date instanceof \DateTime) {
+            $excelDate = \Box\Spout\Writer\Common\Creator\Style\DateFormatHelper::convertToExcelDate($date);
+        }
+
+        return $excelDate;
     }
 
     /**
