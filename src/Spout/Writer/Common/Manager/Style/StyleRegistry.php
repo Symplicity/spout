@@ -16,6 +16,8 @@ class StyleRegistry
     /** @var array [STYLE_ID] => [STYLE] mapping table, keeping track of the registered styles */
     protected $styleIdToStyleMappingTable = [];
 
+    protected $objectMapper = [];
+
     /**
      * @param Style $defaultStyle
      */
@@ -34,17 +36,28 @@ class StyleRegistry
      */
     public function registerStyle(Style $style)
     {
-        $serializedStyle = $this->serialize($style);
-
-        if (!$this->hasStyleAlreadyBeenRegistered($style)) {
-            $nextStyleId = count($this->serializedStyleToStyleIdMappingTable);
-            $style->setId($nextStyleId);
-
-            $this->serializedStyleToStyleIdMappingTable[$serializedStyle] = $nextStyleId;
-            $this->styleIdToStyleMappingTable[$nextStyleId] = $style;
+        $found = false;
+//        $serializedStyle = $this->serialize($style);
+        foreach ($this->objectMapper as $key => $markedObject) {
+            if ($markedObject == $style) {
+                $styleId = $key;
+                $found = true;
+                break;
+            }
         }
 
-        return $this->getStyleFromSerializedStyle($serializedStyle);
+        if ($found == false) {
+            $nextStyleId = count($this->objectMapper);
+            $this->objectMapper[$nextStyleId] = clone $style;
+
+            $style->setId($nextStyleId);
+            $styleAdd = clone $style;
+
+            $this->styleIdToStyleMappingTable[$nextStyleId] = $styleAdd;
+            return $style;
+        }
+
+        return $this->styleIdToStyleMappingTable[$styleId];
     }
 
     /**
@@ -53,13 +66,13 @@ class StyleRegistry
      * @param Style $style
      * @return bool
      */
-    protected function hasStyleAlreadyBeenRegistered(Style $style)
-    {
-        $serializedStyle = $this->serialize($style);
-
-        // Using isset here because it is way faster than array_key_exists...
-        return isset($this->serializedStyleToStyleIdMappingTable[$serializedStyle]);
-    }
+//    protected function hasStyleAlreadyBeenRegistered(Style $style)
+//    {
+//        $serializedStyle = $this->serialize($style);
+//
+//        // Using isset here because it is way faster than array_key_exists...
+//        return isset($this->serializedStyleToStyleIdMappingTable[$serializedStyle]);
+//    }
 
     /**
      * Returns the registered style associated to the given serialization.
@@ -67,12 +80,12 @@ class StyleRegistry
      * @param string $serializedStyle The serialized style from which the actual style should be fetched from
      * @return Style
      */
-    protected function getStyleFromSerializedStyle($serializedStyle)
-    {
-        $styleId = $this->serializedStyleToStyleIdMappingTable[$serializedStyle];
-
-        return $this->styleIdToStyleMappingTable[$styleId];
-    }
+//    protected function getStyleFromSerializedStyle($serializedStyle)
+//    {
+//        $styleId = $this->serializedStyleToStyleIdMappingTable[$serializedStyle];
+//
+//        return $this->styleIdToStyleMappingTable[$styleId];
+//    }
 
     /**
      * @return Style[] List of registered styles

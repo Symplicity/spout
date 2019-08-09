@@ -187,10 +187,15 @@ EOD;
     private function applyStyleAndGetCellXML(Cell $cell, Style $rowStyle, $rowIndex, $cellIndex)
     {
         // Apply row and extra styles
-        $mergedCellAndRowStyle = $this->styleMerger->merge($cell->getStyle(), $rowStyle);
-        $cell->setStyle($mergedCellAndRowStyle);
-        $newCellStyle = $this->styleManager->applyExtraStylesIfNeeded($cell);
+//        $mergedCellAndRowStyle = $this->styleMerger->merge($cell->getStyle(), $rowStyle);
+//        $cell->setStyle($mergedCellAndRowStyle);
 
+        $style = $cell->getStyle();
+        $style->setFontSize(12);
+        $style->setFontName('Calibri');
+        $style->setId(null);
+
+        $newCellStyle = $this->styleManager->applyExtraStylesIfNeeded($cell);
         $registeredStyle = $this->styleManager->registerStyle($newCellStyle);
 
         return $this->getCellXML($rowIndex, $cellIndex, $cell, $registeredStyle->getId());
