@@ -37,7 +37,6 @@ class StyleRegistry
     public function registerStyle(Style $style)
     {
         $found = false;
-//        $serializedStyle = $this->serialize($style);
         foreach ($this->objectMapper as $key => $markedObject) {
             if ($markedObject == $style) {
                 $styleId = $key;
@@ -59,33 +58,6 @@ class StyleRegistry
 
         return $this->styleIdToStyleMappingTable[$styleId];
     }
-
-    /**
-     * Returns whether the given style has already been registered.
-     *
-     * @param Style $style
-     * @return bool
-     */
-//    protected function hasStyleAlreadyBeenRegistered(Style $style)
-//    {
-//        $serializedStyle = $this->serialize($style);
-//
-//        // Using isset here because it is way faster than array_key_exists...
-//        return isset($this->serializedStyleToStyleIdMappingTable[$serializedStyle]);
-//    }
-
-    /**
-     * Returns the registered style associated to the given serialization.
-     *
-     * @param string $serializedStyle The serialized style from which the actual style should be fetched from
-     * @return Style
-     */
-//    protected function getStyleFromSerializedStyle($serializedStyle)
-//    {
-//        $styleId = $this->serializedStyleToStyleIdMappingTable[$serializedStyle];
-//
-//        return $this->styleIdToStyleMappingTable[$styleId];
-//    }
 
     /**
      * @return Style[] List of registered styles

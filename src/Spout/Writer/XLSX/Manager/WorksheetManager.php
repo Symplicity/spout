@@ -161,7 +161,7 @@ EOD;
         $rowXML = '<row r="' . $rowIndex . '" spans="1:' . $numCells . '">';
 
         foreach ($row->getCells() as $cell) {
-            $rowXML .= $this->applyStyleAndGetCellXML($cell, $rowStyle, $rowIndex, $cellIndex);
+            $rowXML .= $this->applyDefaultStyleAndGetCellXML($cell, $rowStyle, $rowIndex, $cellIndex);
             $cellIndex++;
         }
 
@@ -186,10 +186,17 @@ EOD;
      */
     private function applyStyleAndGetCellXML(Cell $cell, Style $rowStyle, $rowIndex, $cellIndex)
     {
-        // Apply row and extra styles
-//        $mergedCellAndRowStyle = $this->styleMerger->merge($cell->getStyle(), $rowStyle);
-//        $cell->setStyle($mergedCellAndRowStyle);
+        $mergedCellAndRowStyle = $this->styleMerger->merge($cell->getStyle(), $rowStyle);
+        $cell->setStyle($mergedCellAndRowStyle);
+        $newCellStyle = $this->styleManager->applyExtraStylesIfNeeded($cell);
 
+        $registeredStyle = $this->styleManager->registerStyle($newCellStyle);
+
+        return $this->getCellXML($rowIndex, $cellIndex, $cell, $registeredStyle->getId());
+    }
+
+    private function applyDefaultStyleAndGetCellXML(Cell $cell, Style $rowStyle, $rowIndex, $cellIndex)
+    {
         $style = $cell->getStyle();
         $style->setFontSize(12);
         $style->setFontName('Calibri');
@@ -200,6 +207,7 @@ EOD;
 
         return $this->getCellXML($rowIndex, $cellIndex, $cell, $registeredStyle->getId());
     }
+
 
     /**
      * Builds and returns xml for a single cell.
