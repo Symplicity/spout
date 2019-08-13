@@ -13,6 +13,7 @@ use Box\Spout\Common\Manager\OptionsManagerInterface;
 use Box\Spout\Writer\Common\Entity\Options;
 use Box\Spout\Writer\Exception\WriterAlreadyOpenedException;
 use Box\Spout\Writer\Exception\WriterNotOpenedException;
+use Generator;
 
 /**
  * Class WriterAbstract
@@ -198,7 +199,7 @@ abstract class WriterAbstract implements WriterInterface
     /**
      * {@inheritdoc}
      */
-    public function addRows(array $rows)
+    public function addRows(Generator $rows)
     {
         foreach ($rows as $row) {
             if (!$row instanceof Row) {

@@ -8,6 +8,7 @@ use Box\Spout\Common\Entity\Style\Style;
 use Box\Spout\Common\Exception\UnsupportedTypeException;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\WriterInterface;
+use Generator;
 
 /**
  * Class WriterEntityFactory
@@ -86,7 +87,7 @@ class WriterEntityFactory
      * @param Style|null $rowStyle
      * @return Row
      */
-    public static function createRow(array $cells = [], Style $rowStyle = null)
+    public static function createRow(Generator $cells, Style $rowStyle = null)
     {
         return new Row($cells, $rowStyle);
     }

@@ -4,6 +4,7 @@ namespace Box\Spout\Writer;
 
 use Box\Spout\Common\Entity\Row;
 use Box\Spout\Common\Entity\Style\Style;
+use Generator;
 
 /**
  * Interface WriterInterface
@@ -59,7 +60,7 @@ interface WriterInterface
      * @throws \Box\Spout\Common\Exception\IOException If unable to write data
      * @return WriterInterface
      */
-    public function addRows(array $rows);
+    public function addRows(Generator $rows);
 
     /**
      * Closes the writer. This will close the streamer as well, preventing new data

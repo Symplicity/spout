@@ -3,6 +3,7 @@
 namespace Box\Spout\Common\Entity;
 
 use Box\Spout\Common\Entity\Style\Style;
+use Generator;
 
 class Row
 {
@@ -23,7 +24,7 @@ class Row
      * @param Cell[] $cells
      * @param Style|null $style
      */
-    public function __construct(array $cells, $style)
+    public function __construct(Generator $cells, $style)
     {
         $this
             ->setCells($cells)
@@ -42,7 +43,7 @@ class Row
      * @param Cell[] $cells
      * @return Row
      */
-    public function setCells(array $cells)
+    public function setCells(Generator $cells)
     {
         $this->cells = [];
         foreach ($cells as $cell) {
