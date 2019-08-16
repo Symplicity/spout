@@ -6,6 +6,7 @@ use Box\Spout\Common\Entity\Row;
 use Box\Spout\Common\Exception\IOException;
 use Box\Spout\Common\Helper\EncodingHelper;
 use Box\Spout\Writer\Common\Entity\Options;
+use Box\Spout\Writer\Common\Manager\WorkbookManagerInterface;
 use Box\Spout\Writer\WriterAbstract;
 
 /**
@@ -60,6 +61,15 @@ class Writer extends WriterAbstract
         $this->optionsManager->setOption(Options::SHOULD_ADD_BOM, (bool) $shouldAddBOM);
 
         return $this;
+    }
+
+    /**
+     * Returns instance of workbook manager to handle sheets.
+     * @return WorkbookManagerInterface
+     */
+    public function getWorkbookManager() : ?WorkbookManagerInterface
+    {
+        return null;
     }
 
     /**

@@ -67,7 +67,7 @@ interface WriterInterface
      * Returns instance of workbook manager to handle sheets.
      * @return WorkbookManagerInterface
      */
-    public function getWorkbookManager() : WorkbookManagerInterface;
+    public function getWorkbookManager() : ?WorkbookManagerInterface;
 
     /**
      * Closes the writer. This will close the streamer as well, preventing new data

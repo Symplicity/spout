@@ -139,7 +139,7 @@ abstract class WriterMultiSheetsAbstract extends WriterAbstract
      * Returns instance of workbook manager to handle sheets.
      * @return WorkbookManagerInterface
      */
-    public function getWorkbookManager() : WorkbookManagerInterface
+    public function getWorkbookManager() : ?WorkbookManagerInterface
     {
         return $this->workbookManager;
     }
