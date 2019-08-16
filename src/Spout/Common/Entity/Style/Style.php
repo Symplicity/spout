@@ -6,7 +6,7 @@ namespace Box\Spout\Common\Entity\Style;
  * Class Style
  * Represents a style to be applied to a cell
  */
-class Style
+class Style implements StyleInterface
 {
     /** Default font values */
     const DEFAULT_FONT_SIZE = 11;

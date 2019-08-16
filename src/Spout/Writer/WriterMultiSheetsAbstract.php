@@ -136,6 +136,15 @@ abstract class WriterMultiSheetsAbstract extends WriterAbstract
     }
 
     /**
+     * Returns instance of workbook manager to handle sheets.
+     * @return WorkbookManagerInterface
+     */
+    public function getWorkbookManager() : WorkbookManagerInterface
+    {
+        return $this->workbookManager;
+    }
+
+    /**
      * Checks if the workbook has been created. Throws an exception if not created yet.
      *
      * @throws WriterNotOpenedException If the workbook is not created yet

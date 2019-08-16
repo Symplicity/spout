@@ -4,6 +4,7 @@ namespace Box\Spout\Writer;
 
 use Box\Spout\Common\Entity\Row;
 use Box\Spout\Common\Entity\Style\Style;
+use Box\Spout\Writer\Common\Manager\WorkbookManagerInterface;
 use Generator;
 
 /**
@@ -61,6 +62,12 @@ interface WriterInterface
      * @return WriterInterface
      */
     public function addRows(Generator $rows);
+
+    /**
+     * Returns instance of workbook manager to handle sheets.
+     * @return WorkbookManagerInterface
+     */
+    public function getWorkbookManager() : WorkbookManagerInterface;
 
     /**
      * Closes the writer. This will close the streamer as well, preventing new data
