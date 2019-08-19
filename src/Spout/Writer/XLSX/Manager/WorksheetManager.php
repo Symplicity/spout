@@ -234,6 +234,14 @@ EOD;
         } elseif ($cell->isDate()) {
             $excelDate = $this->getExcelDate($cell->getValue());
             $cellXML .= '><v>' . $excelDate . '</v></c>';
+        } elseif ($cell->isUrl()) {
+            $url = $cell->getValue();
+            if (empty($url) || ($this->stringHelper->getStringLength($url) > self::MAX_CHARACTERS_PER_CELL)) {
+                $cellXML .= $this->getCellXMLFragmentForNonEmptyString($url);
+            } else {
+                $url = $this->stringsEscaper->escape($url);
+                $cellXML = sprintf('<c r="%s%s" s="' . $styleId . '" t="str"><f>%s</f><v>%s</v></c>', $columnIndex, $rowIndex, 'HYPERLINK("' . $url . '","' . $url . '")', $url);
+            }
         } elseif ($cell->isEmpty()) {
             if ($this->styleManager->shouldApplyStyleOnEmptyCell($styleId)) {
                 $cellXML .= '/>';

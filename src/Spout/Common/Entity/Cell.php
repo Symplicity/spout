@@ -47,6 +47,11 @@ class Cell
     const TYPE_ERROR = 6;
 
     /**
+     * URL cell type
+     */
+    const TYPE_URL = 7;
+
+    /**
      * The value of this cell
      * @var mixed|null
      */
@@ -68,19 +73,19 @@ class Cell
      * @param $value mixed
      * @param Style|null $style
      */
-    public function __construct($value, Style $style = null)
+    public function __construct($value, Style $style = null, ?int $type = null)
     {
-        $this->setValue($value);
+        $this->setValue($value, $type);
         $this->setStyle($style);
     }
 
     /**
      * @param mixed|null $value
      */
-    public function setValue($value)
+    public function setValue($value, ?int $type = null)
     {
         $this->value = $value;
-        $this->type = $this->detectType($value);
+        $this->type = $type ?? $this->detectType($value);
     }
 
     /**
@@ -197,6 +202,15 @@ class Cell
     {
         return $this->type === self::TYPE_ERROR;
     }
+
+    /**
+     * @return bool
+     */
+    public function isUrl()
+    {
+        return $this->type === self::TYPE_URL;
+    }
+
 
     /**
      * @return string

@@ -111,8 +111,8 @@ class WriterEntityFactory
      * @param Style|null $cellStyle
      * @return Cell
      */
-    public static function createCell($cellValue, Style $cellStyle = null)
+    public static function createCell($cellValue, Style $cellStyle = null, ?int $type = null)
     {
-        return new Cell($cellValue, $cellStyle);
+        return new Cell($cellValue, $cellStyle, $type);
     }
 }
