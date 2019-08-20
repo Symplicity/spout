@@ -70,6 +70,12 @@ interface WriterInterface
     public function getWorkbookManager() : ?WorkbookManagerInterface;
 
     /**
+     * Returns the current sheet being worked on
+     * @return mixed
+     */
+    public function getCurrentSheet();
+
+    /**
      * Closes the writer. This will close the streamer as well, preventing new data
      * to be written to the file.
      *

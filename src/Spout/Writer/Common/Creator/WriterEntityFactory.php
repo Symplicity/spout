@@ -5,6 +5,7 @@ namespace Box\Spout\Writer\Common\Creator;
 use Box\Spout\Common\Entity\Cell;
 use Box\Spout\Common\Entity\Row;
 use Box\Spout\Common\Entity\Style\Style;
+use Box\Spout\Common\Entity\Style\StyleInterface;
 use Box\Spout\Common\Exception\UnsupportedTypeException;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\WriterInterface;
@@ -97,7 +98,7 @@ class WriterEntityFactory
      * @param Style|null $rowStyle
      * @return Row
      */
-    public static function createRowFromArray(array $cellValues = [], Style $rowStyle = null)
+    public static function createRowFromArray(array $cellValues = [], StyleInterface $rowStyle = null)
     {
         $cells = array_map(function ($cellValue) {
             return new Cell($cellValue);
@@ -111,7 +112,7 @@ class WriterEntityFactory
      * @param Style|null $cellStyle
      * @return Cell
      */
-    public static function createCell($cellValue, Style $cellStyle = null, ?int $type = null)
+    public static function createCell($cellValue, StyleInterface $cellStyle = null, ?int $type = null)
     {
         return new Cell($cellValue, $cellStyle, $type);
     }
