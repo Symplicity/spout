@@ -118,4 +118,6 @@ class Writer extends WriterAbstract
     {
         $this->lastWrittenRowIndex = 0;
     }
+
+    public function getCurrentSheet() {}
 }
