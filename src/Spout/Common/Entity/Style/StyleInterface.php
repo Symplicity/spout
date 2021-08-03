@@ -197,4 +197,5 @@ interface StyleInterface
      * @return bool Whether format should be applied
      */
     public function shouldApplyFormat();
+    public function reset();
 }
