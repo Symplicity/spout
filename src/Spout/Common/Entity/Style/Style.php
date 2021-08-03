@@ -418,4 +418,36 @@ class Style implements StyleInterface
     {
         return $this->hasSetFormat;
     }
+
+    public function reset()
+    {
+        $this->setFontName(static::DEFAULT_FONT_NAME);
+        $this->setFontColor(static::DEFAULT_FONT_COLOR);
+        $this->setFontSize(static::DEFAULT_FONT_SIZE);
+        if ($this->shouldApplyBorder()) {
+            $this->shouldApplyBorder = false;
+            $this->border = null;
+        }
+        if ($this->isFontBold()) {
+            $this->fontBold = false;
+            $this->hasSetFontBold = false;
+        }
+        if ($this->isFontItalic()) {
+            $this->fontItalic = false;
+            $this->hasSetFontItalic = false;
+        }
+        if ($this->isFontUnderline()) {
+            $this->fontUnderline = false;
+            $this->hasSetFontUnderline = false;
+        }
+        if ($this->isFontStrikethrough()) {
+            $this->fontStrikethrough = false;
+            $this->hasSetFontStrikethrough = false;
+        }
+        $this->shouldApplyFont = false;
+        $this->backgroundColor = null;
+        $this->hasSetBackgroundColor = false;
+        $this->shouldWrapText = false;
+        $this->hasSetWrapText = false;
+    }
 }
