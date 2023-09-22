@@ -27,8 +27,13 @@ class DateFormatHelper
             $year--;
         }
 
-        $century = substr($year, 0, 2);
-        $decade = substr($year, 2, 2);
+        $century = intval(substr($year, 0, 2));
+        $decade = intval(substr($year, 2, 2));
+        $day = intval($day);
+        $hours = intval($hours);
+        $minutes = intval($minutes);
+        $seconds = intval($seconds);
+
         $excelDate = floor((146097 * $century) / 4) + floor((1461 * $decade) / 4) + floor((153 * $month + 2) / 5) + $day + 1721119 - $localDate + $MSEDate1900IsLeapYear;
 
         $excelTime = (($hours * 3600) + ($minutes * 60) + $seconds) / 86400;
